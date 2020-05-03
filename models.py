@@ -1,4 +1,18 @@
-from app import db
+import os
+from flask_sqlalchemy import SQLAlchemy
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+database_path = os.getenv('DATABASE_URL')
+
+db = SQLAlchemy()
+
+def setup_db(app, database_path=database_path):
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_path
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
 
 class Player(db.Model):
     __tablename__ = 'players'
@@ -16,15 +30,15 @@ class Player(db.Model):
     def insert(self): 
         db.session.add(self)
         db.session.commit()
-    
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     def update(self):
         db.session.commit()
 
-    def serialize(self):
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def formatter(self):
         return {
             'id': self.id,
             'firstname': self.first,
@@ -51,11 +65,11 @@ class Game(db.Model):
         db.session.add(self)
         db.session.commit()
     
+    def update(self):
+        db.session.commit()
+
     def delete(self):
         db.session.delete(self)
-        db.session.commit()
-    
-    def update(self):
         db.session.commit()
     
     def serialize(self): 
