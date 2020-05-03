@@ -14,7 +14,7 @@ CORS(app)
 
 @app.route("/players", methods=['GET'])
 # @requires_auth('get:requests')
-def get_players(jwt):
+def get_players():
     try:
         players = Player.query.all()
 
@@ -29,11 +29,10 @@ def get_players(jwt):
 
 @app.route("/games", methods=['GET'])
 # @requires_auth('get:requests')
-def get_games(jwt):
-
+def get_games():
     try:
         games = Game.query.all()
-
+        
         return jsonify({
             'success': True,
             'games': [game.formatter() for game in games]
@@ -47,7 +46,7 @@ def get_games(jwt):
 
 @app.route("/players", methods=['POST'])
 # @requires_auth('post:requests')
-def add_player(jwt):
+def add_player():
 
     body = request.get_json()
     if not ('first' in body and 'last' in body and 'team' in body):
@@ -71,7 +70,7 @@ def add_player(jwt):
 
 @app.route("/players/<id>", methods=['PATCH'])
 # @requires_auth('patch:requests')
-def update_player(jwt, id):
+def update_player(id):
 
     player = Player.query.get(id)
 
@@ -104,7 +103,7 @@ def update_player(jwt, id):
 
 @app.route("/players/<id>", methods=['DELETE'])
 # @requires_auth('delete:requests')
-def delete_player(jwt, id):
+def delete_player(id):
 
     player = Player.query.get(id)
 
@@ -126,7 +125,7 @@ def delete_player(jwt, id):
 
 @app.route("/games", methods=['POST'])
 # @requires_auth('post:requests')
-def add_game(jwt):
+def add_game():
 
     body = request.get_json()
 

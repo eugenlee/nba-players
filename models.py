@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-database_path = os.getenv('DATABASE_URL')
+database_name = "basketball"
+database_path = "postgres://{}/{}".format('localhost:5432', database_name)
 
 db = SQLAlchemy()
 
@@ -12,6 +13,7 @@ def setup_db(app, database_path=database_path):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+    db.create_all()
 
 
 class Player(db.Model):
@@ -72,7 +74,7 @@ class Game(db.Model):
         db.session.delete(self)
         db.session.commit()
     
-    def serialize(self): 
+    def formatter(self): 
         return {
             'id': self.id,
             'home_away': self.home_away,
