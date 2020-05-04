@@ -85,7 +85,7 @@ The API will return three error types when requests fail:
 
 ### Endpoints
 
-### GET / (Authorization: None)
+#### GET / (Authorization: None)
 - General:
     - Login screen. Returns a success value.
 - Sample:
@@ -140,7 +140,7 @@ curl -X GET \
   https://players-games-nba.herokuapp.com/games \
   -H 'Authorization: Bearer <TOKEN>'
 ```
--Response
+- Response
 ```
 {
     "games": [
@@ -212,8 +212,7 @@ curl -X PATCH \
 ```
 curl -X DELETE \
   https://players-games-nba.herokuapp.com/players/6 \
-  -H 'Authorization: Bearer <TOKEN>' \
-  -H "Content-Type: application/json"
+  -H 'Authorization: Bearer <TOKEN>' 
 ```
 - Response:
 ```
