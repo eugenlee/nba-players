@@ -44,6 +44,7 @@ flask run
 ```
 
 ## Testing
+Within models.py must change `app.config['SQLALCHEMY_DATABASE_URI']` to `database_path`. Working on work around for environmental variables.
 To run the tests, run
 ```
 dropdb basketball_test
