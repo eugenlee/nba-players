@@ -171,7 +171,7 @@ curl -X GET \
 
 #### POST /players (Authorization: Manager)
 - General:
-    - Posts new player. Returns
+    - Posts new player. Returns success value.
 - Sample: 
 ```
 curl -X POST \
@@ -182,43 +182,63 @@ curl -X POST \
 ```
 - Response:
 ```
-
+{
+    "success": true
+}
 ```
 
 #### PATCH /players/<int:id> (Authorization: Manager)
 - General:
-    - Updates existing player with given ID. Returns 
+    - Updates existing player with given ID. Returns success value.
 - Sample: 
 ```
-curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"question": "What time is it", "answer": "None of your business", "difficulty": "4", "category": "1"}'
+curl -X PATCH \
+  https://players-games-nba.herokuapp.com/players/4 \
+  -H 'Authorization: Bearer <TOKEN>' \
+  -H "Content-Type: application/json" \
+  -d '{"first": "kawhi", "last": "leonard", "team": "clippers"}'
 ```
 - Response:
 ```
-
+{
+    "success": true
+}
 ```
 
 #### DELETE /players/<int:id> (Authorization: Manager)
 - General:
-    - Deletes existing player with given ID. Returns 
+    - Deletes existing player with given ID. Returns success value and ID of deleted player.
 - Sample: 
 ```
-curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"searchTerm": "time"}'
+curl -X DELETE \
+  https://players-games-nba.herokuapp.com/players/6 \
+  -H 'Authorization: Bearer <TOKEN>' \
+  -H "Content-Type: application/json"
 ```
 - Response:
 ```
-
+{
+    "success": true,
+    "id": 6
+}
 ```
 
 #### POST /games (Authorization: Manager)
 - General:
-    - Fetches questions from a given category. Returns current category, list of question objects, success value and total number of questions.
+    - Posts new game. Returns success value.
 - Sample: 
 ```
-curl http://127.0.0.1:5000/categories/3/questions
+curl -X POST \
+  https://players-games-nba.herokuapp.com/games \
+  -H 'Authorization: Bearer <TOKEN>' \
+  -H "Content-Type: application/json" \
+  -d '{"home_away": "away", "venue": "sleep train"}'
 ```
 - Response:
 ```
-
+{
+    "success": true
+}
 ```
 
 ## Deployment N/A
