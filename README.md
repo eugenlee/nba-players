@@ -89,10 +89,12 @@ The API will return three error types when requests fail:
 - General:
     - Get all players. Returns a success value, first name, last name and team of players.
 - Sample: 
-```curl -X GET \
-      https://players-games-nba.herokuapp.com/players \
-      -H 'Authorization: Bearer <TOKEN>'
 ```
+curl -X GET \
+  https://players-games-nba.herokuapp.com/players \
+  -H 'Authorization: Bearer <TOKEN>'
+```
+- Response:
 ```
 {
     "players": [
