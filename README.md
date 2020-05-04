@@ -121,10 +121,16 @@ curl -X GET \
 }
 ```
 
-#### GET /questions/?page=<page_number>
+#### GET /games (Authorization: Fans and Managers)
 - General:
-    - Get all questions. Returns paginated (10 per page) list of question objects, total number of questions, list of category objects and success value
-- Sample: ```curl http://127.0.0.1:5000/questions```
+    - Get all games. Returns a success value, home or away value and venue.
+- Sample: 
+```
+curl -X GET \
+  https://players-games-nba.herokuapp.com/games \
+  -H 'Authorization: Bearer <TOKEN>'
+```
+-Response
 ```
 {
    "questions" : [
