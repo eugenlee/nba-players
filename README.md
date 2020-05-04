@@ -1,7 +1,7 @@
 # Full Stack NBA players API Backend
 
 ## About
-RESTful API with Auth0 RBAC to access/modify nba games and players. Deployed flask app using Heroku and PostgreSQL.
+RESTful API with Auth0 RBAC to access/modify NBA games and players. Fans can get all endpoints and Managers can get/post/patch/delete. Deployed flask app using Heroku and PostgreSQL.
 
 ## Getting Started
 
@@ -85,22 +85,37 @@ The API will return three error types when requests fail:
 
 ### Endpoints
 
-#### GET /categories
+#### GET /players (Authorization: Fans and Managers)
 - General:
-    - Get all categories. Returns a success value, list of category objects and total number of categories.
-- Sample: ```curl http://127.0.0.1:5000/categories```
+    - Get all players. Returns a success value, first name, last name and team of players.
+- Sample: 
+```curl -X GET \
+      https://players-games-nba.herokuapp.com/players \
+      -H 'Authorization: Bearer <TOKEN>'
+```
 ```
 {
-   "success" : true,
-   "categories" : {
-      "4" : "History",
-      "1" : "Science",
-      "3" : "Geography",
-      "6" : "Sports",
-      "2" : "Art",
-      "5" : "Entertainment"
-   },
-   "total_categories" : 6
+    "players": [
+        {
+            "firstname": "lebron",
+            "id": 2,
+            "lastname": "james",
+            "team": "lakers"
+        },
+        {
+            "firstname": "steph",
+            "id": 3,
+            "lastname": "curry",
+            "team": "warriors"
+        },
+        {
+            "firstname": "seth",
+            "id": 4,
+            "lastname": "curry",
+            "team": "mavericks"
+        }
+    ],
+    "success": true
 }
 ```
 
