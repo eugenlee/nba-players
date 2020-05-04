@@ -16,9 +16,8 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         return jsonify({
-            'success' : True
+            'success': True
         })
-
 
     @app.route("/players", methods=['GET'])
     @requires_auth('get:requests')
@@ -31,7 +30,7 @@ def create_app(test_config=None):
                 'players': [player.formatter() for player in players]
             })
 
-        except:
+        except Exception:
             abort(404)
 
     @app.route("/games", methods=['GET'])
@@ -45,7 +44,7 @@ def create_app(test_config=None):
                 'games': [game.formatter() for game in games]
             })
 
-        except:
+        except Exception:
             abort(404)
 
     # players with authorization
@@ -70,7 +69,7 @@ def create_app(test_config=None):
                 'success': True
             })
 
-        except:
+        except Exception:
             abort(422)
 
     @app.route("/players/<id>", methods=['PATCH'])
@@ -100,7 +99,7 @@ def create_app(test_config=None):
                     'success': True
                 })
 
-            except:
+            except Exception:
                 abort(422)
         else:
             abort(404)
@@ -119,7 +118,7 @@ def create_app(test_config=None):
                     'delete': id
                 })
 
-            except:
+            except Exception:
                 abort(422)
         else:
             abort(404)
@@ -146,7 +145,7 @@ def create_app(test_config=None):
                 'success': True
             })
 
-        except:
+        except Exception:
             abort(422)
 
     # errorhandler
