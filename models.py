@@ -47,7 +47,7 @@ class Player(db.Model):
             'id': self.id,
             'firstname': self.first,
             'lastname': self.last,
-            'birthdate': self.team,
+            'team': self.team,
         }
 
     def __repr__(self):
