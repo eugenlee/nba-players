@@ -1,5 +1,8 @@
 # Full Stack NBA players API Backend
 
+## About
+RESTful API with Auth0 RBAC to access/modify nba games and players. Deployed flask app using Heroku and PostgreSQL.
+
 ## Getting Started
 
 ### Installing Dependencies
