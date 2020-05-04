@@ -22,6 +22,10 @@ Once you have your virtual environment setup and running, install dependencies b
 ```bash
 pip install -r requirements.txt
 ```
+To test locally, set up environmental variable:
+```bash
+source setup.sh 
+```
 
 This will install all of the required packages we selected within the `requirements.txt` file.
 
