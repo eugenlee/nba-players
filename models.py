@@ -8,6 +8,7 @@ database_path = "postgres://{}/{}".format('localhost:5432', database_name)
 
 db = SQLAlchemy()
 
+
 def setup_db(app, database_path=database_path):
     app.config['SQLALCHEMY_DATABASE_URI'] = database_path
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -29,7 +30,7 @@ class Player(db.Model):
         self.last = last
         self.team = team
 
-    def insert(self): 
+    def insert(self):
         db.session.add(self)
         db.session.commit()
 
@@ -63,23 +64,23 @@ class Game(db.Model):
         self.home_away = home_away
         self.venue = venue
 
-    def insert(self): 
+    def insert(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def update(self):
         db.session.commit()
 
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-    
-    def formatter(self): 
+
+    def formatter(self):
         return {
             'id': self.id,
             'home_away': self.home_away,
             'venue': self.venue
         }
 
-    def __repr__(self): 
+    def __repr__(self):
         return '<id {}>'.format(self.id)

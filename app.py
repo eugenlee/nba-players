@@ -5,6 +5,7 @@ from flask_cors import CORS
 from models import Player, Game, db, setup_db
 from auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
@@ -13,9 +14,9 @@ def create_app(test_config=None):
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers',
-                            'Content-Type, Authorization')
+                             'Content-Type, Authorization')
         response.headers.add('Access-Control-Allow-Methods',
-                            'GET, POST, PATCH, DELETE, OPTIONS')
+                             'GET, POST, PATCH, DELETE, OPTIONS')
         return response
 
     # general access
@@ -34,13 +35,12 @@ def create_app(test_config=None):
         except:
             abort(404)
 
-
     @app.route("/games", methods=['GET'])
     @requires_auth('get:requests')
     def get_games(jwt):
         try:
             games = Game.query.all()
-            
+
             return jsonify({
                 'success': True,
                 'games': [game.formatter() for game in games]
@@ -48,7 +48,6 @@ def create_app(test_config=None):
 
         except:
             abort(404)
-
 
     # players with authorization
 
@@ -74,7 +73,6 @@ def create_app(test_config=None):
 
         except:
             abort(422)
-
 
     @app.route("/players/<id>", methods=['PATCH'])
     @requires_auth('patch:requests')
@@ -108,7 +106,6 @@ def create_app(test_config=None):
         else:
             abort(404)
 
-
     @app.route("/players/<id>", methods=['DELETE'])
     @requires_auth('delete:requests')
     def delete_player(jwt, id):
@@ -127,7 +124,6 @@ def create_app(test_config=None):
                 abort(422)
         else:
             abort(404)
-
 
     # games with authorization
 
@@ -154,7 +150,6 @@ def create_app(test_config=None):
         except:
             abort(422)
 
-
     # errorhandler
 
     @app.errorhandler(422)
@@ -165,7 +160,6 @@ def create_app(test_config=None):
             "message": "unprocessable"
         }), 422
 
-
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({
@@ -173,7 +167,6 @@ def create_app(test_config=None):
             "error": 404,
             "message": "resource not found"
         }), 404
-
 
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):

@@ -11,6 +11,7 @@ API_AUDIENCE = 'nba'
 
 # AuthError Exception
 
+
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
