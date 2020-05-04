@@ -30,7 +30,7 @@ createdb basketball
 
 ## Running the server
 
-From within the `backend` directory first ensure you are working using your created virtual environment.
+From within the project folder first ensure you are working using your created virtual environment.
 
 To run the server, execute:
 
@@ -52,8 +52,19 @@ python3 test_app.py
 
 ### Getting Started
 
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, ```http://127.0.0.1:5000/```, which is set as a proxy in the frontend configuration.
-- Authentication: This version of the application does not require authentication or API keys.
+- Base URL: At present this app can be run locally and is hosted on [Heroku](https://players-games-nba.herokuapp.com/). The backend app is hosted at the default, ```http://127.0.0.1:5000/```, which is set as a proxy in the frontend configuration.
+- Authentication: Tokens for 2 roles provided in test_app.py.
+
+### Roles and Permissions
+There are 2 roles within the API
+- Fan:
+    - Can view players and games
+- Manager:
+    - All permissions that Fans have and...
+    - Add players
+    - Update players
+    - Delete players
+    - Add games
 
 ### Error Handling
 Errors are returned as JSON objects in the following format:
@@ -67,6 +78,7 @@ Errors are returned as JSON objects in the following format:
 The API will return two error types when requests fail:
 - 404: Resource Not Found
 - 422: Not Processable
+- 401: Authorization error
 
 ### Endpoints
 
