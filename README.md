@@ -75,7 +75,7 @@ Errors are returned as JSON objects in the following format:
     "message": "Not found"
 }
 ```
-The API will return two error types when requests fail:
+The API will return three error types when requests fail:
 - 404: Resource Not Found
 - 422: Not Processable
 - 401: Authorization error
