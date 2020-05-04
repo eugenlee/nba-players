@@ -13,6 +13,13 @@ def create_app(test_config=None):
 
     # general access
 
+    @app.route('/')
+    def index():
+        return jsonify({
+            'success' : True
+        })
+
+
     @app.route("/players", methods=['GET'])
     @requires_auth('get:requests')
     def get_players(jwt):
