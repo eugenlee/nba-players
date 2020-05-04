@@ -5,12 +5,13 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 database_name = "basketball"
 database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+database_heroku = 'postgres://udujxogetfxnml:480c7a67acedd28e943f702083a8bb551001ee03192ba6decde300dd512c176e@ec2-52-87-135-240.compute-1.amazonaws.com:5432/dft3vp8tcgic43'
 
 db = SQLAlchemy()
 
 
 def setup_db(app, database_path=database_path):
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_path
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_heroku
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
