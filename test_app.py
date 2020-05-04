@@ -6,8 +6,32 @@ from models import Player, Game, db, setup_db
 from flask import Flask
 from app import create_app
 
-MANAGER_TOKEN = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Inh5NHpGUk9sV2dBbmhBaFZEbW92YSJ9.eyJpc3MiOiJodHRwczovL2V1Z2VuZWxlZS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU5Yjk0YTI2M2Y4MDAwYzhjMjE1MjdlIiwiYXVkIjoibmJhIiwiaWF0IjoxNTg4NjA3ODM4LCJleHAiOjE1ODg2Nzk4MzgsImF6cCI6IlM2algzNWxBS0xwVlFMVUFwZ2ZJbUxUdjBwRzBnR3pjIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6cmVxdWVzdHMiLCJnZXQ6cmVxdWVzdHMiLCJwYXRjaDpyZXF1ZXN0cyIsInBvc3Q6cmVxdWVzdHMiXX0.hZlpTffGoSvMsnakQPzYrwgGfqXgStbf68xP7W6n3ez14oD_kg3SW5f5R3KOq72WKoMFxoGe2alxO1qqKZlM2weFRJm-zt2ioc5TP_TGMGDSK-6THkfqWwJ1ZjMeG8_HL_hsl2Pr_uJstQ2-AChLb4YhOxDb6gMhGLulqI_QWk9SjXmMEYerCud9a_bRjgRuOVY5RkcyXcRv2w-oiQtX4ijNRVGHlvuoi5eAmhJzpWIw9Kx8LtYtjBlXR3igMj1Uw1qWNGDxMIiQO66GfCr3SoWbmAhWE_8A_QnUaFWdLCJUr9NjfabdzkrrUMtaEYpV8OmGanuvUESIgkmPzdLm5Q'
-FAN_TOKEN = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Inh5NHpGUk9sV2dBbmhBaFZEbW92YSJ9.eyJpc3MiOiJodHRwczovL2V1Z2VuZWxlZS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWVhNjI0YmU1NGIxNGMwYzEyNTllZTEwIiwiYXVkIjoibmJhIiwiaWF0IjoxNTg4NjA3OTY5LCJleHAiOjE1ODg2Nzk5NjksImF6cCI6IlM2algzNWxBS0xwVlFMVUFwZ2ZJbUxUdjBwRzBnR3pjIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6cmVxdWVzdHMiXX0.YNVisj1UX7o_kmdin8dUmxrwNalZKy103hKJJ6FwiyY8dTS_X445mRBh1mMJmIHrOjebgxx14ab2gsPhjrrt5lcIx3XD_XN2vCiLwDcjWPHlXPTXe997t1hn3dz-zucsyO90gnl_wfhJ3uasyVKFlQhk9YQLiR_z4fOTV0ZDveoDoyTYyecY0AqWr55a_-d9e-ZeUmuGIlUPGWCXySy9ab2t0ZCF_wtg737BIuSXafFnklt4npJJ6WjGTDKgv7uhVQolbhyCFLqRIzEFGyt-OUvwGo9Y7mDzKz6mQzumdaUm_ucGFH4NRHWJnyFshes8yLaSqJg3t0AU3m1YIPN88w'
+MANAGER_TOKEN = ("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Inh5NHpGUk9s"
+                "V2dBbmhBaFZEbW92YSJ9.eyJpc3MiOiJodHRwczovL2V1Z2VuZWxlZS5h"
+                "dXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU5Yjk0YTI2M2Y4MDAwYzhjM"
+                "jE1MjdlIiwiYXVkIjoibmJhIiwiaWF0IjoxNTg4NjA3ODM4LCJleHAiOj"
+                "E1ODg2Nzk4MzgsImF6cCI6IlM2algzNWxBS0xwVlFMVUFwZ2ZJbUxUdjB"
+                "wRzBnR3pjIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6"
+                "cmVxdWVzdHMiLCJnZXQ6cmVxdWVzdHMiLCJwYXRjaDpyZXF1ZXN0cyIsI"
+                "nBvc3Q6cmVxdWVzdHMiXX0.hZlpTffGoSvMsnakQPzYrwgGfqXgStbf68"
+                "xP7W6n3ez14oD_kg3SW5f5R3KOq72WKoMFxoGe2alxO1qqKZlM2weFRJm"
+                "-zt2ioc5TP_TGMGDSK-6THkfqWwJ1ZjMeG8_HL_hsl2Pr_uJstQ2-AChL"
+                "b4YhOxDb6gMhGLulqI_QWk9SjXmMEYerCud9a_bRjgRuOVY5RkcyXcRv2"
+                "w-oiQtX4ijNRVGHlvuoi5eAmhJzpWIw9Kx8LtYtjBlXR3igMj1Uw1qWNG"
+                "DxMIiQO66GfCr3SoWbmAhWE_8A_QnUaFWdLCJUr9NjfabdzkrrUMtaEYp"
+                "V8OmGanuvUESIgkmPzdLm5Q")
+FAN_TOKEN = ("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Inh5NHpGUk9sV2dB"
+            "bmhBaFZEbW92YSJ9.eyJpc3MiOiJodHRwczovL2V1Z2VuZWxlZS5hdXRoMC5j"
+            "b20vIiwic3ViIjoiYXV0aDB8NWVhNjI0YmU1NGIxNGMwYzEyNTllZTEwIiwiY"
+            "XVkIjoibmJhIiwiaWF0IjoxNTg4NjA3OTY5LCJleHAiOjE1ODg2Nzk5NjksIm"
+            "F6cCI6IlM2algzNWxBS0xwVlFMVUFwZ2ZJbUxUdjBwRzBnR3pjIiwic2NvcGU"
+            "iOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6cmVxdWVzdHMiXX0.YNVisj1UX7o_"
+            "kmdin8dUmxrwNalZKy103hKJJ6FwiyY8dTS_X445mRBh1mMJmIHrOjebgxx14"
+            "ab2gsPhjrrt5lcIx3XD_XN2vCiLwDcjWPHlXPTXe997t1hn3dz-zucsyO90gn"
+            "l_wfhJ3uasyVKFlQhk9YQLiR_z4fOTV0ZDveoDoyTYyecY0AqWr55a_-d9e-Z"
+            "eUmuGIlUPGWCXySy9ab2t0ZCF_wtg737BIuSXafFnklt4npJJ6WjGTDKgv7uh"
+            "VQolbhyCFLqRIzEFGyt-OUvwGo9Y7mDzKz6mQzumdaUm_ucGFH4NRHWJnyFsh"
+            "es8yLaSqJg3t0AU3m1YIPN88w")
 
 
 class TestCases(unittest.TestCase):
