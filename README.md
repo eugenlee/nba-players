@@ -85,7 +85,17 @@ The API will return three error types when requests fail:
 
 ### Endpoints
 
-#### GET /players (Authorization: Fans and Managers)
+### GET / (Authorization: None)
+- General:
+    - Login screen. Returns a success value.
+- Sample:
+```
+{
+    "success": true
+}
+```
+
+#### GET /players (Authorization: Fan and Manager)
 - General:
     - Get all players. Returns a success value, first name, last name and team of players.
 - Sample: 
@@ -121,7 +131,7 @@ curl -X GET \
 }
 ```
 
-#### GET /games (Authorization: Fans and Managers)
+#### GET /games (Authorization: Fan and Manager)
 - General:
     - Get all games. Returns a success value, home or away value and venue.
 - Sample: 
@@ -133,336 +143,82 @@ curl -X GET \
 -Response
 ```
 {
-   "questions" : [
-      {
-         "difficulty" : 4,
-         "question" : "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?",
-         "category" : 5,
-         "answer" : "Apollo 13",
-         "id" : 2
-      },
-      {
-         "difficulty" : 4,
-         "question" : "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?",
-         "category" : 5,
-         "id" : 4,
-         "answer" : "Tom Cruise"
-      },
-      {
-         "id" : 5,
-         "answer" : "Maya Angelou",
-         "difficulty" : 2,
-         "question" : "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?",
-         "category" : 4
-      },
-      {
-         "question" : "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?",
-         "difficulty" : 3,
-         "category" : 5,
-         "answer" : "Edward Scissorhands",
-         "id" : 6
-      },
-      {
-         "category" : 4,
-         "question" : "What boxer's original name is Cassius Clay?",
-         "difficulty" : 1,
-         "answer" : "Muhammad Ali",
-         "id" : 9
-      },
-      {
-         "id" : 10,
-         "answer" : "Brazil",
-         "difficulty" : 3,
-         "question" : "Which is the only team to play in every soccer World Cup tournament?",
-         "category" : 6
-      },
-      {
-         "question" : "Which country won the first ever soccer World Cup in 1930?",
-         "difficulty" : 4,
-         "category" : 6,
-         "answer" : "Uruguay",
-         "id" : 11
-      },
-      {
-         "difficulty" : 2,
-         "question" : "Who invented Peanut Butter?",
-         "category" : 4,
-         "id" : 12,
-         "answer" : "George Washington Carver"
-      },
-      {
-         "question" : "What is the largest lake in Africa?",
-         "difficulty" : 2,
-         "category" : 3,
-         "answer" : "Lake Victoria",
-         "id" : 13
-      },
-      {
-         "answer" : "Agra",
-         "id" : 15,
-         "question" : "The Taj Mahal is located in which Indian city?",
-         "difficulty" : 2,
-         "category" : 3
-      }
-   ],
-   "total_questions" : 18,
-   "categories" : {
-      "4" : "History",
-      "2" : "Art",
-      "5" : "Entertainment",
-      "1" : "Science",
-      "3" : "Geography",
-      "6" : "Sports"
-   },
-   "success" : true
+    "games": [
+        {
+            "home_away": "home",
+            "id": 1,
+            "venue": "staples"
+        },
+        {
+            "home_away": "away",
+            "id": 2,
+            "venue": "oracle"
+        },
+        {
+            "home_away": "away",
+            "id": 3,
+            "venue": "msg"
+        },
+        {
+            "home_away": "away",
+            "id": 4,
+            "venue": "united"
+        }
+    ],
+    "success": true
 }
 ```
 
-#### DELETE /questions/<int:question_id>
+#### POST /players (Authorization: Manager)
 - General:
-    - Deletes an existing question with given ID. Returns deleted id, list of questions objects, success value and number of remaining questions.
-- Sample: ```curl -X DELETE http://127.0.0.1:5000/questions/4```
+    - Posts new player. Returns
+- Sample: 
 ```
-{
-  "deleted": 4, 
-  "questions": [
-    {
-      "answer": "Apollo 13", 
-      "category": 5, 
-      "difficulty": 4, 
-      "id": 2, 
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    }, 
-    {
-      "answer": "Maya Angelou", 
-      "category": 4, 
-      "difficulty": 2, 
-      "id": 5, 
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    }, 
-    {
-      "answer": "Edward Scissorhands", 
-      "category": 5, 
-      "difficulty": 3, 
-      "id": 6, 
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    }, 
-    {
-      "answer": "Muhammad Ali", 
-      "category": 4, 
-      "difficulty": 1, 
-      "id": 9, 
-      "question": "What boxer's original name is Cassius Clay?"
-    }, 
-    {
-      "answer": "Brazil", 
-      "category": 6, 
-      "difficulty": 3, 
-      "id": 10, 
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    }, 
-    {
-      "answer": "Uruguay", 
-      "category": 6, 
-      "difficulty": 4, 
-      "id": 11, 
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    }, 
-    {
-      "answer": "George Washington Carver", 
-      "category": 4, 
-      "difficulty": 2, 
-      "id": 12, 
-      "question": "Who invented Peanut Butter?"
-    }, 
-    {
-      "answer": "Lake Victoria", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 13, 
-      "question": "What is the largest lake in Africa?"
-    }, 
-    {
-      "answer": "Agra", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 15, 
-      "question": "The Taj Mahal is located in which Indian city?"
-    }, 
-    {
-      "answer": "Escher", 
-      "category": 2, 
-      "difficulty": 1, 
-      "id": 16, 
-      "question": "Which Dutch graphic artist\u2013initials M C was a creator of optical illusions?"
-    }
-  ], 
-  "success": true, 
-  "total_questions": 17
-}
+curl -X POST \
+  https://players-games-nba.herokuapp.com/players \
+  -H 'Authorization: Bearer <TOKEN>' \
+  -H "Content-Type: application/json" \
+  -d '{"first": "jayson", "last": "tatum", "team": "boston"}'
+```
+- Response:
 ```
 
-#### POST /questions
+```
+
+#### PATCH /players/<int:id> (Authorization: Manager)
 - General:
-    - Creates a new question with given inputs. Returns success value, question id, paginated list of question objects and number of total questions.
-- Sample: ```curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"question": "What time is it", "answer": "None of your business", "difficulty": "4", "category": "1"}'```
+    - Updates existing player with given ID. Returns 
+- Sample: 
 ```
-{
-  "created": 52, 
-  "questions": [
-    {
-      "answer": "Apollo 13", 
-      "category": 5, 
-      "difficulty": 4, 
-      "id": 2, 
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    }, 
-    {
-      "answer": "Maya Angelou", 
-      "category": 4, 
-      "difficulty": 2, 
-      "id": 5, 
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    }, 
-    {
-      "answer": "Edward Scissorhands", 
-      "category": 5, 
-      "difficulty": 3, 
-      "id": 6, 
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    }, 
-    {
-      "answer": "Muhammad Ali", 
-      "category": 4, 
-      "difficulty": 1, 
-      "id": 9, 
-      "question": "What boxer's original name is Cassius Clay?"
-    }, 
-    {
-      "answer": "Brazil", 
-      "category": 6, 
-      "difficulty": 3, 
-      "id": 10, 
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    }, 
-    {
-      "answer": "Uruguay", 
-      "category": 6, 
-      "difficulty": 4, 
-      "id": 11, 
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    }, 
-    {
-      "answer": "George Washington Carver", 
-      "category": 4, 
-      "difficulty": 2, 
-      "id": 12, 
-      "question": "Who invented Peanut Butter?"
-    }, 
-    {
-      "answer": "Lake Victoria", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 13, 
-      "question": "What is the largest lake in Africa?"
-    }, 
-    {
-      "answer": "Agra", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 15, 
-      "question": "The Taj Mahal is located in which Indian city?"
-    }, 
-    {
-      "answer": "Escher", 
-      "category": 2, 
-      "difficulty": 1, 
-      "id": 16, 
-      "question": "Which Dutch graphic artist\u2013initials M C was a creator of optical illusions?"
-    }
-  ], 
-  "success": true, 
-  "total_questions": 18
-}
+curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"question": "What time is it", "answer": "None of your business", "difficulty": "4", "category": "1"}'
+```
+- Response:
 ```
 
-#### POST /questions/search
+```
+
+#### DELETE /players/<int:id> (Authorization: Manager)
 - General:
-    - Search questions based on a search term. Returns any questions for whom the search term is a substring of the question.
-- Sample: ```curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"searchTerm": "time"}'```
+    - Deletes existing player with given ID. Returns 
+- Sample: 
 ```
-{
-  "questions": [
-    {
-      "answer": "One", 
-      "category": 2, 
-      "difficulty": 4, 
-      "id": 18, 
-      "question": "How many paintings did Van Gogh sell in his lifetime?"
-    }, 
-    {
-      "answer": "None of your business", 
-      "category": 1, 
-      "difficulty": 4, 
-      "id": 52, 
-      "question": "What time is it"
-    }
-  ], 
-  "success": true, 
-  "total_questions": 2
-}
+curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"searchTerm": "time"}'
+```
+- Response:
 ```
 
-#### GET /categories/<int:category_id>/questions
+```
+
+#### POST /games (Authorization: Manager)
 - General:
     - Fetches questions from a given category. Returns current category, list of question objects, success value and total number of questions.
-- Sample: ```curl http://127.0.0.1:5000/categories/3/questions```
+- Sample: 
 ```
-{
-  "current_category": 3, 
-  "questions": [
-    {
-      "answer": "Lake Victoria", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 13, 
-      "question": "What is the largest lake in Africa?"
-    }, 
-    {
-      "answer": "Agra", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 15, 
-      "question": "The Taj Mahal is located in which Indian city?"
-    }, 
-    {
-      "answer": "a lot", 
-      "category": 3, 
-      "difficulty": 5, 
-      "id": 25, 
-      "question": "how much woud could a wood chuck chuck if it could chuck wood?"
-    }
-  ], 
-  "success": true, 
-  "total_questions": 3
-}
+curl http://127.0.0.1:5000/categories/3/questions
+```
+- Response:
 ```
 
-#### POST /quizzes
-- General:
-    - Returns a random question within a given category that is not one of the previous questions. Returns success value and a list of a question object.
-- Sample: ```curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [], "quiz_category": {"type": "Science", "id": "1"}}'```
-```
-{
-  "question": {
-    "answer": "The Liver", 
-    "category": 1, 
-    "difficulty": 4, 
-    "id": 20, 
-    "question": "What is the heaviest organ in the human body?"
-  }, 
-  "success": true
-}
 ```
 
 ## Deployment N/A
@@ -471,4 +227,4 @@ curl -X GET \
 Eugene
 
 ## Acknowledgments
-Udacity!
+Thanks to Udacity for a great program!
