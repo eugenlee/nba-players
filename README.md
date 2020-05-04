@@ -1,7 +1,7 @@
 # Full Stack NBA players API Backend
 
 ## About
-RESTful API with Auth0 RBAC to access/modify NBA games and players. Fans can get all endpoints and Managers can get/post/patch/delete. Deployed flask app using Heroku and PostgreSQL.
+RESTful API with Auth0 RBAC to access/modify NBA games and players. Fans can get all endpoints and Managers can get/post/patch/delete. Deployed flask app using [Heroku](https://players-games-nba.herokuapp.com/) and PostgreSQL.
 
 ## Getting Started
 
