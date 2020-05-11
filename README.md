@@ -3,12 +3,6 @@
 ## About
 RESTful API with Auth0 RBAC to access/modify NBA games and players. Fans can get all endpoints and Managers can get/post/patch/delete. Deployed flask app using [Heroku](https://players-games-nba.herokuapp.com/) and PostgreSQL.
 
-#### Other projects within this course
-1. [fyyur](https://github.com/eugenlee/fyyur)
-2. [trivia](https://github.com/eugenlee/trivia)
-3. [coffeeshop](https://github.com/eugenlee/coffeeshop)
-4. [flask_kubernetes](https://github.com/eugenlee/flask_kubernetes)
-
 ## Getting Started
 
 ### Installing Dependencies
@@ -257,3 +251,9 @@ Eugene
 
 ## Acknowledgments
 Thanks to Udacity for a great program!
+
+## Check out my other projects from this course!
+1. [fyyur](https://github.com/eugenlee/fyyur)
+2. [trivia](https://github.com/eugenlee/trivia)
+3. [coffeeshop](https://github.com/eugenlee/coffeeshop)
+4. [flask_kubernetes](https://github.com/eugenlee/flask_kubernetes)
