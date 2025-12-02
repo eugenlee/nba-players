@@ -65,6 +65,6 @@ urllib3==2.5.0
 virtualenv==20.26.6
 wcwidth==0.1.9
 websocket-client==0.57.0
-Werkzeug==3.0.6
+Werkzeug==3.1.4
 wrapt==1.11.2
 WTForms==2.2.1
